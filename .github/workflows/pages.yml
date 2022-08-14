@@ -32,9 +32,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Quasar
         run: npm i -g @quasar/cli
-      # - name: Init Quasar
-      #  run: npm init quasar
-      #  working-directory: './src'
+      - name: Restore Packages
+        run: npm install
+        working-directory: './src'
       - name: Build
         run: quasar build
         working-directory: './src'
