@@ -27,8 +27,7 @@ message AnswerMessage {
 
 export default boot(({ app }) => {
   var root = parse(answerProto).root;
-  var AnswerMessage = root.lookupType('oepski.AnswerMessage');
-  app.$AnswerMessage = AnswerMessage;
+  app.$AnswerMessage = root.lookupType('oepski.AnswerMessage');
   app.$AnswerMessage.base64Encode = function (byteArray) {
     return btoa(
       Array.from(new Uint8Array(byteArray))
@@ -60,8 +59,8 @@ export default boot(({ app }) => {
 
   app.$AnswerMessage.FromBase64 = function (p) {
     var buffer = app.$AnswerMessage.base64Decode(p);
-    var message = AnswerMessage.decode(buffer);
-    var answer = AnswerMessage.toObject(message, { enums: String });
+    var message = app.$AnswerMessage.decode(buffer);
+    var answer = app.$AnswerMessage.toObject(message, { enums: String });
     return answer;
   };
 
