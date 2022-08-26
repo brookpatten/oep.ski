@@ -1,14 +1,13 @@
-//Answer.proto
-
+//answer.proto
 package oepski;
 syntax = "proto3";
 
 enum TurnShape {
-  unspecified = 0;
-  cShape = 1;
-  sShape = 2;
-  jShape = 3;
-  zShape = 4;
+  UNSPECIFIED = 0;
+  C_SHAPE = 1;
+  S_SHAPE = 2;
+  J_SHAPE = 3;
+  Z_SHAPE = 4;
 }
 
 message AnswerMessage {
