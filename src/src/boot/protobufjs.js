@@ -6,7 +6,7 @@ import protobuf from 'protobufjs';
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(({ app }) => {
-  protobuf.load('/answer.proto?import', function (err, root) {
+  protobuf.load('answer.proto', function (err, root) {
     console.info('loaded proto file');
     var AnswerMessage = root.lookupType('oepski.AnswerMessage');
     app.$AnswerMessage = AnswerMessage;
