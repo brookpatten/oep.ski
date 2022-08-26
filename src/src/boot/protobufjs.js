@@ -1,10 +1,12 @@
 import { boot } from 'quasar/wrappers';
 import protobuf from 'protobufjs';
 
+//import messageProto from '/public/answer.proto';
+
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(({ app }) => {
-  protobuf.load('/Answer.proto', function (err, root) {
+  protobuf.load('/answer.proto?import', function (err, root) {
     console.info('loaded proto file');
     var AnswerMessage = root.lookupType('oepski.AnswerMessage');
     app.$AnswerMessage = AnswerMessage;
@@ -44,7 +46,7 @@ export default boot(({ app }) => {
       return answer;
     };
 
-    var payload = { turnShape: 'jShape', comments: 'test', comments2: null };
+    var payload = { turnShape: 'S_SHAPE', comments: 'test', comments2: null };
     var base64 = app.$AnswerMessage.ToBase64(payload);
     var payload2 = app.$AnswerMessage.FromBase64(base64);
 
