@@ -4,7 +4,7 @@ import protobuf from 'protobufjs';
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 export default boot(({ app }) => {
-  protobuf.load('Answer.proto.js', function (err, root) {
+  protobuf.load('Answer.proto', function (err, root) {
     console.info('loaded proto file');
     var AnswerMessage = root.lookupType('oepski.AnswerMessage');
     app.$AnswerMessage = AnswerMessage;
@@ -43,6 +43,12 @@ export default boot(({ app }) => {
       var answer = AnswerMessage.toObject(message, { enums: String });
       return answer;
     };
+
+    var payload = { turnShape: 'jShape', comments: 'test', comments2: null };
+    var base64 = app.$AnswerMessage.ToBase64(payload);
+    var payload2 = app.$AnswerMessage.FromBase64(base64);
+
+    console.info('proto test: ' + JSON.stringify(payload) + ' = ' + base64 + ' = ' + JSON.stringify(payload2));
 
     // console.info('loaded proto file');
 
