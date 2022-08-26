@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers';
-import protobuf from 'protobufjs';
+import { parse } from 'protobufjs';
 
 //import messageProto from '/public/answer.proto';
 
@@ -26,8 +26,7 @@ message AnswerMessage {
 }`;
 
 export default boot(({ app }) => {
-  var root = protobuf.parse(answerProto).root;
-  //console.info(JSON.stringify(root));
+  var root = parse(answerProto).root;
   var AnswerMessage = root.lookupType('oepski.AnswerMessage');
   app.$AnswerMessage = AnswerMessage;
   app.$AnswerMessage.base64Encode = function (byteArray) {
