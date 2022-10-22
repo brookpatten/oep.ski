@@ -64,7 +64,7 @@ export default boot(({ app }) => {
     return answer;
   };
 
-  var payload = { turnShape: 'S_SHAPE', comments: 'test', comments2: null };
+  var payload = { turnShape: 'S_SHAPE', comments: 'test', comments2: 'comments2' };
   var base64 = app.$AnswerMessage.ToBase64(payload);
   var payload2 = app.$AnswerMessage.FromBase64(base64);
 

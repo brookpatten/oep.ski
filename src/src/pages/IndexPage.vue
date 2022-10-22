@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="q-video">
-        <YouTube ref="youtube" :src="'https://www.youtube.com/watch?v=' + selectedVideo.videoId" @ready="ready" />
+        <YouTube ref="youtube" :src="'https://www.youtube.com/watch?v=' + selectedVideo.videoId" @ready="ready" width="100%" />
         <!--:height="320"
         width="100%" 
         @ended="onEnded" 
@@ -14,36 +14,37 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <q-btn-group>
-        <q-btn push label="Full" @click="setTimeCode(null)" :color="timeCode === null ? 'primary' : 'info'" />
+    <div class="col col-1"><q-item-label>Turns</q-item-label></div>
+    <div class="col col-11">
+      <q-btn-group class="float-right">
+        <q-btn push label="All" @click="setTimeCode(null)" :color="timeCode === null ? 'primary' : 'info'" />
         <q-btn
           push
-          label="2 Turns"
+          label="2"
           @click="setTimeCode(selectedVideo.timeCodes.twoTurns)"
           :color="timeCode === selectedVideo.timeCodes.twoTurns ? 'primary' : 'info'"
         />
         <q-btn
           push
-          label="1 Turn"
+          label="1"
           @click="setTimeCode(selectedVideo.timeCodes.oneTurn)"
           :color="timeCode === selectedVideo.timeCodes.oneTurn ? 'primary' : 'info'"
         />
         <q-btn
           push
-          label="Initiation"
+          label="1/3"
           @click="setTimeCode(selectedVideo.timeCodes.initiation)"
           :color="timeCode === selectedVideo.timeCodes.initiation ? 'primary' : 'info'"
         />
         <q-btn
           push
-          label="Shaping"
+          label="2/3"
           @click="setTimeCode(selectedVideo.timeCodes.shaping)"
           :color="timeCode === selectedVideo.timeCodes.shaping ? 'primary' : 'info'"
         />
         <q-btn
           push
-          label="Finishing"
+          label="3/3"
           @click="setTimeCode(selectedVideo.timeCodes.finishing)"
           :color="timeCode === selectedVideo.timeCodes.finishing ? 'primary' : 'info'"
         />
@@ -52,7 +53,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <q-btn-group>
+      <q-btn-group class="float-right">
         <q-btn push :label="s * 100 + '%'" v-for="s in usefulSpeeds" v-bind:key="s" :color="speed === s ? 'primary' : 'info'" @click="setSpeed(s)" />
       </q-btn-group>
     </div>
@@ -91,13 +92,15 @@
           >
             Describe the {{ skiPerformance.text }} of the ski during the {{ phase.text }} phase of the turn<br />
 
-            <q-checkbox
+            {{ JSON.stringify(answer) }}
+
+            <!--<q-checkbox
               v-model="answer.phases[phase.text][skiPerformance.text]"
               :val="e.text"
               :label="e.text"
               v-for="e in getEffects(phase, skiPerformance)"
               v-bind:key="e.text"
-            />
+            />-->
 
             <q-stepper-navigation>
               <q-btn @click="step = step == 1 + (phase.order - 1) * 3 + skiPerformance.order ? step + 1 : step" color="primary" label="Continue" />
@@ -202,9 +205,10 @@ export default defineComponent({
       },
       answer: {
         turnShape: {},
-        phases: {},
+        effects: [],
         indications: [],
         causes: [],
+        fundamentals: [],
         progressions: [],
         notes: '',
       },
@@ -547,21 +551,11 @@ export default defineComponent({
     },
     setupAnswer() {
       this.answer.turnShape = null;
-
-      this.answer.phases[this.glossary.turnPhases.initiation.text] = {};
-      this.answer.phases[this.glossary.turnPhases.initiation.text][this.glossary.skiPerformances.tipping.text] = [];
-      this.answer.phases[this.glossary.turnPhases.initiation.text][this.glossary.skiPerformances.twisting.text] = [];
-      this.answer.phases[this.glossary.turnPhases.initiation.text][this.glossary.skiPerformances.bending.text] = [];
-
-      this.answer.phases[this.glossary.turnPhases.shaping.text] = {};
-      this.answer.phases[this.glossary.turnPhases.shaping.text][this.glossary.skiPerformances.tipping.text] = [];
-      this.answer.phases[this.glossary.turnPhases.shaping.text][this.glossary.skiPerformances.twisting.text] = [];
-      this.answer.phases[this.glossary.turnPhases.shaping.text][this.glossary.skiPerformances.bending.text] = [];
-
-      this.answer.phases[this.glossary.turnPhases.finishing.text] = {};
-      this.answer.phases[this.glossary.turnPhases.finishing.text][this.glossary.skiPerformances.tipping.text] = [];
-      this.answer.phases[this.glossary.turnPhases.finishing.text][this.glossary.skiPerformances.twisting.text] = [];
-      this.answer.phases[this.glossary.turnPhases.finishing.text][this.glossary.skiPerformances.bending.text] = [];
+      this.answer.effects = [];
+      this.answer.indications = [];
+      this.answer.causes = [];
+      this.answer.fundamentals = [];
+      this.answer.progressions = [];
     },
     check() {},
     getEffects(turnPhase, skiPerformance) {
