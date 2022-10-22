@@ -27,8 +27,8 @@ message AnswerMessage {
 
 export default boot(({ app }) => {
   var root = parse(answerProto).root;
-  app.$AnswerMessage = root.lookupType('oepski.AnswerMessage');
-  app.$AnswerMessage.base64Encode = function (byteArray) {
+  app.config.globalProperties.$AnswerMessage = root.lookupType('oepski.AnswerMessage');
+  app.config.globalProperties.$AnswerMessage.base64Encode = function (byteArray) {
     return btoa(
       Array.from(new Uint8Array(byteArray))
         .map((val) => {
@@ -40,7 +40,7 @@ export default boot(({ app }) => {
       .replace(/\//g, '_')
       .replace(/\=/g, '');
   };
-  app.$AnswerMessage.base64Decode = function (b64urlstring) {
+  app.config.globalProperties.$AnswerMessage.base64Decode = function (b64urlstring) {
     return new Uint8Array(
       atob(b64urlstring.replace(/-/g, '+').replace(/_/g, '/'))
         .split('')
@@ -50,23 +50,23 @@ export default boot(({ app }) => {
     );
   };
 
-  app.$AnswerMessage.ToBase64 = function (answer) {
-    var message = app.$AnswerMessage.fromObject(answer);
-    var buffer = app.$AnswerMessage.encode(message).finish();
-    var base64 = app.$AnswerMessage.base64Encode(buffer);
+  app.config.globalProperties.$AnswerMessage.ToBase64 = function (answer) {
+    var message = app.config.globalProperties.$AnswerMessage.fromObject(answer);
+    var buffer = app.config.globalProperties.$AnswerMessage.encode(message).finish();
+    var base64 = app.config.globalProperties.$AnswerMessage.base64Encode(buffer);
     return base64;
   };
 
-  app.$AnswerMessage.FromBase64 = function (p) {
-    var buffer = app.$AnswerMessage.base64Decode(p);
-    var message = app.$AnswerMessage.decode(buffer);
-    var answer = app.$AnswerMessage.toObject(message, { enums: String });
+  app.config.globalProperties.$AnswerMessage.FromBase64 = function (p) {
+    var buffer = app.config.globalProperties.$AnswerMessage.base64Decode(p);
+    var message = app.config.globalProperties.$AnswerMessage.decode(buffer);
+    var answer = app.config.globalProperties.$AnswerMessage.toObject(message, { enums: String });
     return answer;
   };
 
   var payload = { turnShape: 'S_SHAPE', comments: 'test', comments2: 'comments2' };
-  var base64 = app.$AnswerMessage.ToBase64(payload);
-  var payload2 = app.$AnswerMessage.FromBase64(base64);
+  var base64 = app.config.globalProperties.$AnswerMessage.ToBase64(payload);
+  var payload2 = app.config.globalProperties.$AnswerMessage.FromBase64(base64);
 
   console.info('proto test: ' + JSON.stringify(payload) + ' = ' + base64 + ' = ' + JSON.stringify(payload2));
 

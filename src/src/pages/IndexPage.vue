@@ -67,11 +67,11 @@
           <br />
           <q-btn-group>
             <q-btn
-              v-for="shape in glossary.turnShapes"
-              v-bind:key="shape.text"
-              @click="setTurnShape(shape)"
-              :color="answer.turnShape === shape.text ? 'primary' : 'info'"
-              >{{ shape.text }}</q-btn
+              v-for="(value, key) in glossary.turnShapes"
+              v-bind:key="key"
+              @click="setTurnShape(key)"
+              :color="answer.turnShape === key ? 'primary' : 'info'"
+              >{{ value.text }}</q-btn
             >
           </q-btn-group>
 
@@ -151,6 +151,7 @@
 
       Answer: {{ JSON.stringify(answer) }}<br />
       Step: {{ JSON.stringify(step) }}<br />
+      Protobuf: {{ this.$AnswerMessage.ToBase64(answer) }}<br />
 
       <!-- place QPageScroller at end of page -->
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -247,7 +248,7 @@ export default defineComponent({
       this.startTimer();
     },
     setTurnShape(shape) {
-      this.answer.turnShape = shape.text;
+      this.answer.turnShape = shape;
     },
     setSpeed(speed) {
       this.speed = speed;
@@ -417,10 +418,10 @@ export default defineComponent({
       };
 
       this.glossary.turnShapes = {
-        cShape: { text: 'C Shape (Complete)', causes: [] },
-        sShape: { text: 'S Shape (Incomplete)', causes: [] },
-        jShape: { text: 'J Shape', causes: [] },
-        zShape: { text: 'Z Shape', causes: [] },
+        C_SHAPE: { text: 'C Shape (Complete)', causes: [] },
+        S_SHAPE: { text: 'S Shape (Incomplete)', causes: [] },
+        J_SHAPE: { text: 'J Shape', causes: [] },
+        Z_SHAPE: { text: 'Z Shape', causes: [] },
       };
 
       this.glossary.indications = {
