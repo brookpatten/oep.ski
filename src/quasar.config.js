@@ -9,6 +9,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
 const { configure } = require('quasar/wrappers');
+const pbjs = require('protobufjs-cli/pbjs');
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -196,4 +197,9 @@ module.exports = configure(function (/* ctx */) {
       // extendBexManifestJson (json) {}
     },
   };
+});
+
+pbjs.main(['--target', 'static-module', '-w', 'es6', '-o', 'src/proto/oepski.proto.js', 'src/proto/*.proto'], function (err, output) {
+  if (err) throw err;
+  // do something with output
 });

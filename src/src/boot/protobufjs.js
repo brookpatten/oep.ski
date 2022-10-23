@@ -1,33 +1,14 @@
 import { boot } from 'quasar/wrappers';
-import { parse } from 'protobufjs';
+//import protobufjs from 'protobufjs/minimal';
+import { oepski } from '../proto/oepski.proto.js';
 
 //import messageProto from '/public/answer.proto';
 
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 
-var answerProto = `//answer.proto
-package oepski;
-syntax = "proto3";
-
-enum TurnShape {
-  UNSPECIFIED = 0;
-  C_SHAPE = 1;
-  S_SHAPE = 2;
-  J_SHAPE = 3;
-  Z_SHAPE = 4;
-}
-
-message AnswerMessage {
-  
-  string comments = 1;
-  TurnShape turnShape = 2;
-  string comments2 = 3;
-}`;
-
 export default boot(({ app }) => {
-  var root = parse(answerProto).root;
-  app.config.globalProperties.$AnswerMessage = root.lookupType('oepski.AnswerMessage');
+  app.config.globalProperties.$AnswerMessage = oepski.AnswerMessage;
   app.config.globalProperties.$AnswerMessage.base64Encode = function (byteArray) {
     return btoa(
       Array.from(new Uint8Array(byteArray))

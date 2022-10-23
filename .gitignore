@@ -27,3 +27,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# generated protobuf js files
+*/proto/*.proto.js
