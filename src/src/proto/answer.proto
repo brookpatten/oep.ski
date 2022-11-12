@@ -10,9 +10,65 @@ enum TurnShape {
   Z_SHAPE = 4;
 }
 
+enum Effect {
+  UNSPECIFIED = 0;
+  sequentialTwisting= 1;
+  simultaneousTwisting= 2;
+  progressiveTwisting= 3;
+  incompleteTwisting= 4;
+  minimalEdging= 5;
+  sequentialEdging= 6;
+  simultaneousEdging= 7;
+  progressiveEdging= 8;
+  oppositeEdging= 9;
+  matchedEdging= 10;
+  abruptEdging= 11;
+  tipFlutter= 12;
+  minimalBending= 13;
+  bootBackBending= 14;
+  tipToTailBending= 15;
+  insideSkiForward= 16;
+  matchedBending= 17;
+  outsideSkiBendingMore= 18;
+}
+
+enum Indication {
+  UNSPECIFIED = 0;
+  lackOfAnkleFlex= 1;
+  tooMuchKneeFlex= 2;
+  armsBack= 3;
+  tooMuchHipFlex= 4;
+  inwardLean= 5;
+  lossOfEdgeOnOutsideSki= 6;
+  skiddingOut= 7;
+  lowInsideHand= 8;
+  upperBodyTurnsFirst= 9;
+  turningWithHipsOrShoulders= 10;
+  upperBodyMatchesSkiDirection= 11;
+  crossingOutsideHandInFrontOfTheBody= 12;
+  narrowStance= 13;
+}
+
+enum Phase {
+  UNSPECIFIED = 0;
+  initiation=1;
+  shaping=2;
+  finishing=3;
+}
+
+
+message PhaseEffect {
+  Phase phase = 0;
+  Effect effect = 1;
+}
+
 message AnswerMessage {
   
   string comments = 1;
-  TurnShape turnShape = 2;
-  string comments2 = 3;
+  TurnShape turnShape = 2; 
+  repeated PhaseEffect effects=3;
+  repeated Indication indications=4;
+  repeated string causes=5;
+  repeated string fundamentals=6;
+  repeated string progressions=7;
 }

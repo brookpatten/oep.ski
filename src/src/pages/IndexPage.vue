@@ -80,7 +80,7 @@
           </q-stepper-navigation>
         </q-step>
 
-        <template v-for="phase in glossary.turnPhases" v-bind:key="phase.text">
+        <template v-for="(phase, phaseName) in glossary.turnPhases" v-bind:key="phase.text">
           <q-step
             :name="1 + (phase.order - 1) * 3 + skiPerformance.order"
             :title="phase.text + ' ' + skiPerformance.text"
@@ -92,15 +92,15 @@
           >
             Describe the {{ skiPerformance.text }} of the ski during the {{ phase.text }} phase of the turn<br />
 
-            {{ JSON.stringify(answer) }}
-
-            <!--<q-checkbox
-              v-model="answer.phases[phase.text][skiPerformance.text]"
-              :val="e.text"
-              :label="e.text"
-              v-for="e in getEffects(phase, skiPerformance)"
-              v-bind:key="e.text"
-            />-->
+            <q-btn-group>
+              <q-btn
+                v-for="effect in getEffects(phase, skiPerformance)"
+                v-bind:key="effect.text"
+                @click="toggleEffect(phaseName, effect.name)"
+                :color="isEffectSelected(phaseName, effect.name) ? 'primary' : 'info'"
+                >{{ effect.text }}</q-btn
+              >
+            </q-btn-group>
 
             <q-stepper-navigation>
               <q-btn @click="step = step == 1 + (phase.order - 1) * 3 + skiPerformance.order ? step + 1 : step" color="primary" label="Continue" />
@@ -151,7 +151,7 @@
 
       Answer: {{ JSON.stringify(answer) }}<br />
       Step: {{ JSON.stringify(step) }}<br />
-      Protobuf: {{ this.$AnswerMessage.ToBase64(answer) }}<br />
+      Protobuf: {{ encodedMessage }}<br />
 
       <!-- place QPageScroller at end of page -->
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
@@ -254,15 +254,35 @@ export default defineComponent({
       this.speed = speed;
       this.player.setPlaybackRate(this.speed);
     },
-    effectCheck(p, perf, phase) {
-      alert(JSON.stringify(p) + ' ' + perf + ' ' + phase);
+    toggleEffect(phase, effect) {
+      console.log('toggle phase ' + phase + ' effect ' + effect);
+      for (var i = 0; i < this.answer.effects.length; i++) {
+        if (this.answer.effects[i].effect == effect && this.answer.effects[i].phase == phase) {
+          this.answer.effects.splice(i, 1);
+          return;
+        }
+      }
+
+      //if we made it this far it wasn't in the list, add it
+      this.answer.effects.push({ phase, effect });
     },
-    indicationCheck(p, indication) {
-      alert(JSON.stringify(p) + ' ' + indication);
+    isEffectSelected(phase, effect) {
+      for (var i = 0; i < this.answer.effects.length; i++) {
+        if (this.answer.effects[i].effect == effect && this.answer.effects[i].phase == phase) {
+          return true;
+        }
+      }
+      return false;
     },
-    causeCheck(p, cause) {
-      alert(JSON.stringify(p) + ' ' + cause);
-    },
+    // effectCheck(p, perf, phase) {
+    //   alert(JSON.stringify(p) + ' ' + perf + ' ' + phase);
+    // },
+    // indicationCheck(p, indication) {
+    //   alert(JSON.stringify(p) + ' ' + indication);
+    // },
+    // causeCheck(p, cause) {
+    //   alert(JSON.stringify(p) + ' ' + cause);
+    // },
     setupGlossary() {
       this.glossary.fundamentals = {
         comBos: {
@@ -504,6 +524,22 @@ export default defineComponent({
           primaryFundamentals: [this.glossary.fundamentals.rotation, this.glossary.fundamentals.edges, this.glossary.fundamentals.comBos],
         },
       };
+
+      var setNames = function (dictObject) {
+        for (var p in dictObject) {
+          dictObject[p].name = p;
+        }
+      };
+
+      setNames(this.glossary.fundamentals);
+      setNames(this.glossary.skiPerformances);
+      setNames(this.glossary.turnPhases);
+      setNames(this.glossary.causes);
+      setNames(this.glossary.effects);
+      setNames(this.glossary.turnShapes);
+      setNames(this.glossary.indications);
+      setNames(this.glossary.drillTypes);
+      setNames(this.glossary.drills);
     },
     setupVideo() {
       this.selectedVideo.videoId = 'IvpMe15IQn8';
@@ -558,7 +594,7 @@ export default defineComponent({
       this.answer.fundamentals = [];
       this.answer.progressions = [];
     },
-    check() {},
+    //check() {},
     getEffects(turnPhase, skiPerformance) {
       var effects = [];
       for (const [key, value] of Object.entries(this.glossary.effects)) {
@@ -580,6 +616,11 @@ export default defineComponent({
       return this.filter(this.availableSpeeds, function (s) {
         return s <= 1.0;
       });
+    },
+    encodedMessage: function () {
+      var encoded = this.$AnswerMessage.ToBase64(this.answer);
+      console.log('encoded: (' + encoded.length + '):' + encoded);
+      return encoded;
     },
 
     causeGroups() {

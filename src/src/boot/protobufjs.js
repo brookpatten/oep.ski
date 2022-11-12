@@ -2,8 +2,6 @@ import { boot } from 'quasar/wrappers';
 //import protobufjs from 'protobufjs/minimal';
 import { oepski } from '../proto/oepski.proto.js';
 
-//import messageProto from '/public/answer.proto';
-
 // "async" is optional;
 // more info on params: https://v2.quasar.dev/quasar-cli/boot-files
 
@@ -45,7 +43,7 @@ export default boot(({ app }) => {
     return answer;
   };
 
-  var payload = { turnShape: 'S_SHAPE', comments: 'test', comments2: 'comments2' };
+  var payload = { turnShape: 'S_SHAPE', effects: [{ phase: 'initiation', effect: 'outsideSkiBendingMore' }], indications: ['lackOfAnkleFlex'] };
   var base64 = app.config.globalProperties.$AnswerMessage.ToBase64(payload);
   var payload2 = app.config.globalProperties.$AnswerMessage.FromBase64(base64);
 
