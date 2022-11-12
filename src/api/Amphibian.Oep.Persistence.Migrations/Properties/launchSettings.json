@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Amphibian.Oep.Persistence.Migrations": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Amphibian.Oep.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Amphibian.Oep.Api.Controllers.AssignmentController.CreateSignatures(Amphibian.Oep.Api.Controllers.AssignmentController.CreateSignaturesDto)">
+            <summary>
+            create new signatures and return a complete list of signatures for the assignment
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Amphibian.Oep.Api.Dtos.CurrentUserPatrolDto">
+            <summary>
+            used to return what access current user has to a given patrol
+            </summary>
+        </member>
+        <member name="T:Amphibian.Oep.Api.Services.PatrolCreationService">
+            <summary>
+            create default and demo data
+            </summary>
+        </member>
+        <member name="M:Amphibian.Oep.Api.Services.PlanService.CreatePlan(System.String,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            </summary>
+            <param name="name"></param>
+            <param name="patrolId"></param>
+            <param name="copyFromPlanId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -32,16 +32,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Quasar
         run: npm i -g @quasar/cli
+        working-directory: './src/ui'
       - name: Restore Packages
         run: npm install
-        working-directory: './src'
+        working-directory: './src/ui'
       - name: Build
         run: quasar build
-        working-directory: './src'
+        working-directory: './src/ui'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './src/dist/spa'
+          path: './src/ui/dist/spa'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
