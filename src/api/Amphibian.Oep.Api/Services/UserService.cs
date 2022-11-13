@@ -53,7 +53,6 @@ namespace Amphibian.Oep.Api.Services
 
             user.FirstName = "Removed";
             user.LastName = "Removed";
-            user.NspNumber = null;
             user.PasswordHash = null;
             user.PasswordHashIterations = null;
             user.PasswordSalt = null;

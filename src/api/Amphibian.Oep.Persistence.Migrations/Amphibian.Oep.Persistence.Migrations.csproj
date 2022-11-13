@@ -7,11 +7,27 @@
 
   <ItemGroup>
     <None Remove="Scripts\0001-Skills.sql" />
+    <None Remove="Scripts\0001-Users.sql" />
+    <None Remove="Scripts\0002-Tokens.sql" />
+    <None Remove="Scripts\0003-Email.sql" />
+    <None Remove="Scripts\0004-AuthProviders.sql" />
+    <None Remove="Scripts\0005-Jwt.sql" />
+    <None Remove="Scripts\0006-ApiLogs.sql" />
+    <None Remove="Scripts\0007-FileUploads.sql" />
+    <None Remove="Scripts\0008-Videos.sql" />
     <None Remove="Scripts\0999-Indexes.sql" />
     <None Remove="Scripts\1001-TestData.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\0001-Users.sql" />
+    <EmbeddedResource Include="Scripts\0002-Tokens.sql" />
+    <EmbeddedResource Include="Scripts\0003-Email.sql" />
+    <EmbeddedResource Include="Scripts\0004-AuthProviders.sql" />
+    <EmbeddedResource Include="Scripts\0005-Jwt.sql" />
+    <EmbeddedResource Include="Scripts\0006-ApiLogs.sql" />
+    <EmbeddedResource Include="Scripts\0007-FileUploads.sql" />
+    <EmbeddedResource Include="Scripts\0008-Videos.sql" />
     <EmbeddedResource Include="Scripts\0999-Indexes.sql" />
     <EmbeddedResource Include="Scripts\1001-TestData.sql" />
   </ItemGroup>

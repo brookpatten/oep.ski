@@ -119,7 +119,7 @@ namespace Amphibian.Oep.Configuration
 
     public class TestConfiguration
     {
-        public enum PersistenceTestCompletionAction { DropOnComplete, RenameOnComplete, DropIfSuccessRenameIfFailures, DropIfSuccess }
+        public enum PersistenceTestCompletionAction { DropOnComplete, RenameOnComplete, DropIfSuccessRenameIfFailures, DropIfSuccess, Persist }
         public PersistenceTestCompletionAction OnPersistenceTestCompletion { get; set; }
         public string ConnectionString { get; set; }
 

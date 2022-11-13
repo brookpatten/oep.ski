@@ -59,9 +59,9 @@ namespace Amphibian.Oep.Tests.Repositories
         [Test]
         public async Task CanGetUsersByIds()
         {
-            var users = await _userRepository.GetUsers(new List<int>() { 1, 2, 3 });
+            var users = await _userRepository.GetUsers(new List<int>() { 1 });
 
-            Assert.AreEqual(3,users.Count());
+            Assert.AreEqual(1,users.Count());
         }
     }
 }

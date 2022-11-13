@@ -12,7 +12,6 @@ namespace Amphibian.Oep.Api.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool AllowEmailNotifications { get; set; }
-        public string NspNumber { get; set; }
         public string ProfileImageUrl { get; set; }
 
         public string GetFullName()

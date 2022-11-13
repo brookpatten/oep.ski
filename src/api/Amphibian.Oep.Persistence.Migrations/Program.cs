@@ -27,7 +27,7 @@ namespace Amphibian.Oep.Persistence.Migrations
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(result.Error);
                     Console.ResetColor();
-
+                    Console.ReadLine();
                 }
 
                 Console.ForegroundColor = ConsoleColor.Green;

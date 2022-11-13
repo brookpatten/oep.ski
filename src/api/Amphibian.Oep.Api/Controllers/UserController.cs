@@ -129,7 +129,6 @@ namespace Amphibian.Oep.Api.Controllers
                     user.LastName = dto.LastName;
                     //user.Email = dto.Email;
                     user.AllowEmailNotifications = dto.AllowEmailNotifications;
-                    user.NspNumber = dto.NspNumber;
                     user.ProfileImageUrl = dto.ProfileImageUrl;
                     await _userRepository.UpdateUser(user);
                 }
