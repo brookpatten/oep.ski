@@ -34,7 +34,6 @@ namespace Amphibian.Oep.Api.Controllers
 
         public class FileUpload
         {
-            public int? PatrolId { get; set; }
             public IFormFile FormFile { get; set; }
         }
         [HttpPost]

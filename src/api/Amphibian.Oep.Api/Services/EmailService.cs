@@ -176,7 +176,7 @@ Please follow use link to reset your password {_urlRoot}{resetRoute}",
             message.HtmlContent = htmlDoc.DocumentNode.InnerHtml;
         }
 
-        private async Task<Response> Send(SendGridMessage message,params User[] to)
+        private async Task<SendGrid.Response> Send(SendGridMessage message,params User[] to)
         {
             SendGridClient client = new SendGridClient(new SendGridClientOptions()
             {

@@ -53,7 +53,7 @@ namespace Amphibian.Oep.Api.Controllers
         [HttpGet]
         [Route("user/list")]
         [Authorize]
-        public async Task<IActionResult> List(int patrolId)
+        public async Task<IActionResult> List()
         {
             //if ()
             //{

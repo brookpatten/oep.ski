@@ -9,7 +9,6 @@ namespace Amphibian.Oep.Api.Models
     public enum Role
     {
         Administrator,
-        Coordinator
     }
 
     public enum Permission
@@ -32,18 +31,18 @@ namespace Amphibian.Oep.Api.Models
         public static Dictionary<Role, IList<Permission>> DefaultPermissions = new Dictionary<Role, IList<Permission>>()
         {
             //admins get everything
-            {Role.Administrator,Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList() },
-            //coordinators get a subset of less destructive things
-            {   Role.Coordinator, new List<Permission>(){
-                Permission.MaintainAssignments, 
-                Permission.RevokeSignatures, 
-                Permission.MaintainAnnouncements, 
-                Permission.MaintainEvents, 
-                Permission.MaintainSchedule,
-                Permission.MaintainTimeClock,
-                Permission.MaintainWorkItems
-                } 
-            }
+            {Role.Administrator,Enum.GetValues(typeof(Permission)).Cast<Permission>().ToList() }//,
+            ////coordinators get a subset of less destructive things
+            //{   Role.Administrator, new List<Permission>(){
+            //    Permission.MaintainAssignments, 
+            //    Permission.RevokeSignatures, 
+            //    Permission.MaintainAnnouncements, 
+            //    Permission.MaintainEvents, 
+            //    Permission.MaintainSchedule,
+            //    Permission.MaintainTimeClock,
+            //    Permission.MaintainWorkItems
+            //    } 
+            //}
         };
 
         public static IList<Permission> Permissions(this Role? role)

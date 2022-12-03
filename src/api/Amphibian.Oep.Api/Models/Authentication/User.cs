@@ -27,5 +27,8 @@ namespace Amphibian.Oep.Api.Models
         public bool UsesFacebookAuth { get; set; }
         public bool UsesGoogleAuth { get; set; }
         public bool UsesMicrosoftAuth { get; set; }
+
+        //todo, when we support other sports update this
+        public List<SnowSport> SnowSports { get; set; } = new List<SnowSport>() { SnowSport.AlpineSki };
     }
 }
