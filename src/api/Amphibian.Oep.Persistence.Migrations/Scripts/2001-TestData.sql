@@ -1,10 +1,14 @@
-﻿select @systemUserId = id from users where email='system';
+﻿declare @systemUserId int;
+select @systemUserId = id from users where email='system';
 
 declare @now datetime=getdate();
 
+declare @alpineSkiId int;
+select @alpineSkiId = id from snowsports where code='AlpineSki';
 
-insert into videos (videoprovider,videoproviderkey,title,snowsport,createdbyuserid,createdat)
-values ('YouTube','IvpMe15IQn8','L2 BP Practice #2','AlpineSki',@systemUserId,@now);
+
+insert into videos (videoprovider,videoproviderkey,title,snowsportid,createdbyuserid,createdat)
+values ('YouTube','IvpMe15IQn8','L2 BP Practice #2',@alpineSkiId,@systemUserId,@now);
 
 declare @videoId int = scope_identity();
 

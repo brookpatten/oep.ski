@@ -32,9 +32,23 @@ namespace Amphibian.Oep.Api.Controllers
 
         [HttpGet]
         [Route("response/search")]
-        public async Task<IActionResult> Search(SnowSport snowSport,int? userId,string orderBy)
+        public async Task<IActionResult> Search(int? snowSportId,int? userId,string orderBy)
         {
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("response/recent")]
+        public async Task<IActionResult> Recent(int snowSportId, int count=6)
+        {
+            return Ok(await _responseRepository.GetRecentResponses(snowSportId, count));
+        }
+
+        [HttpGet]
+        [Route("response/popular")]
+        public async Task<IActionResult> Popular(int snowSportId, int count = 6)
+        {
+            return Ok(await _responseRepository.GetPopularResponses(snowSportId, count));
         }
 
         [HttpGet]

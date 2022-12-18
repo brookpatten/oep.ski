@@ -31,7 +31,7 @@ namespace Amphibian.Oep.Api.Models
         public string Text { get; set; }
         public SkiPerformance? SkiPerformance { get; set; }
         public TurnPhase? TurnPhase { get; set; }
-        public SnowSport SnowSport { get; set; }
+        public int SnowSportId { get; set; }
         public int CreatedByUserId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? AcceptedAt { get; set; }

@@ -173,3 +173,45 @@ ALTER TABLE dbo.Feedbacks ADD CONSTRAINT
 	Id
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
+
+ALTER TABLE dbo.Videos ADD CONSTRAINT
+	FK_Videos_SnowSports FOREIGN KEY
+	(
+	SnowSportId
+	) REFERENCES dbo.SnowSports
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+ALTER TABLE dbo.Observations ADD CONSTRAINT
+	FK_Observations_SnowSports FOREIGN KEY
+	(
+	SnowSportId
+	) REFERENCES dbo.SnowSports
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+
+ALTER TABLE dbo.Fundamentals ADD CONSTRAINT
+	FK_Fundamentals_SnowSports FOREIGN KEY
+	(
+	SnowSportId
+	) REFERENCES dbo.SnowSports
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+
+ALTER TABLE dbo.Causes ADD CONSTRAINT
+	FK_Causes_SnowSports FOREIGN KEY
+	(
+	SnowSportId
+	) REFERENCES dbo.SnowSports
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 

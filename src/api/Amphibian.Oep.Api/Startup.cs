@@ -130,6 +130,9 @@ namespace Amphibian.Oep.Api
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IApiLogRepository, ApiLogRepository>();
             services.AddScoped<IFileUploadRepository, FileUploadRepository>();
+            services.AddScoped<IVideoRepository, VideoRepository>();
+            services.AddScoped<IResponseRepository, ResponseRepository>();
+            services.AddScoped<IGlossaryRepository, GlossaryRepository>();
 
             //validations
             services.AddScoped<IValidator<AuthenticationController.RegistrationRequest>, RegistrationValidator>();
@@ -139,7 +142,8 @@ namespace Amphibian.Oep.Api
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
             services.AddScoped<Services.IPasswordService, Services.PasswordService>(sp=>new Services.PasswordService(5,32));
             services.AddScoped<IEmailService, EmailService>();
-            
+            services.AddScoped<IVideoService, VideoService>();
+            services.AddScoped<IResponseService, ResponseService>();
             services.AddScoped<IUserService, UserService>();
             
             services.AddScoped<ISysAdminService, SysAdminService>();
@@ -148,9 +152,9 @@ namespace Amphibian.Oep.Api
             services.AddScoped<ISystemClock, SystemClock>();
 
             //hangfire
-            services.AddHangfire(x => x.UseSqlServerStorage(serviceConfiguration.Database.ConnectionString)
-            .UseSerilogLogProvider());
-            services.AddHangfireServer();
+            //services.AddHangfire(x => x.UseSqlServerStorage(serviceConfiguration.Database.ConnectionString)
+            //.UseSerilogLogProvider());
+            //services.AddHangfireServer();
             //RecurringJob.AddOrUpdate<Api.Jobs.CreateAvailableDemoPatrolJob>(job => job.Run(), "0 8 * * *");
             //RecurringJob.AddOrUpdate<Api.Jobs.DeleteUnusedDemoPatrolsJob>(job => job.Run(), "0 * * * *");
         }
@@ -229,10 +233,10 @@ namespace Amphibian.Oep.Api
                 endpoints.MapControllers();
             });
 
-            app.UseHangfireDashboard("/jobs", new DashboardOptions()
-            {
-                Authorization = new[] { new HangfireAuthorizationFilter() }
-            });
+            //app.UseHangfireDashboard("/jobs", new DashboardOptions()
+            //{
+            //    Authorization = new[] { new HangfireAuthorizationFilter() }
+            //});
             //RecurringJob.AddOrUpdate<Api.Jobs.CreateAvailableDemoPatrolJob>(job => job.Run(), "0 8 * * *");
             
             //BackgroundJob.Enqueue<Api.Jobs.CreateAvailableDemoPatrolJob>(job => job.Run());

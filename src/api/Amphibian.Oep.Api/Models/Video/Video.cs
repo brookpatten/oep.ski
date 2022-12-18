@@ -11,6 +11,6 @@ namespace Amphibian.Oep.Api.Models
         public string Title { get; set; }
         public int CreatedByUserId { get; set; }
         public DateTime CreatedAt { get; set; }
-        public SnowSport SnowSport { get; set; }
+        public int SnowSportId { get; set; }
     }
 }

@@ -1,11 +1,23 @@
-﻿CREATE TABLE [dbo].[Videos](
+﻿CREATE TABLE [dbo].[SnowSports](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Code] [varchar](128) NOT NULL,
+	[Name] [varchar](512) NOT NULL,
+	[CreatedByUserId] [int] NOT NULL,
+	[CreatedAt] [datetime] NOT NULL
+ CONSTRAINT [PK_SnowSports] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Videos](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VideoProvider] [varchar](512) NOT NULL,
 	[VideoProviderKey] [varchar](512) NOT NULL,
 	[Title] [varchar](512) NOT NULL,
 	[CreatedByUserId] [int] NOT NULL,
 	[CreatedAt] [datetime] NOT NULL,
-	[SnowSport] [varchar](20) NOT NULL
+	[SnowSportId] [int] NOT NULL
  CONSTRAINT [PK_Videos] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -31,7 +43,7 @@ CREATE TABLE [dbo].[Fundamentals](
 	[Code] [varchar](128) NOT NULL,
 	[Text] [varchar](512) NOT NULL,
 	[Index] [int] NOT NULL,
-	[SnowSport] [varchar](20) NOT NULL
+	[SnowSportId] [int] NOT NULL
  CONSTRAINT [PK_Fundamentals] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -53,7 +65,7 @@ CREATE TABLE [dbo].[Causes](
 	[Code] [varchar](128) NOT NULL,
 	[Text] [varchar](512) NOT NULL,
 	[Index] [int] NOT NULL,
-	[SnowSport] [varchar](20) NOT NULL,
+	[SnowSportId] [int] NOT NULL,
 	[CreatedByUserId] [int] NOT NULL,
 	[CreatedAt] [datetime] NOT NULL,
 	[AcceptedAt] [datetime] NULL
@@ -81,7 +93,7 @@ CREATE TABLE [dbo].[Observations](
 	[Category] [varchar](20) NOT NULL,
 	[SkiPerformance] [varchar](20) NULL,
 	[TurnPhase] [varchar](20) NULL,
-	[SnowSport] [varchar](20) NOT NULL,
+	[SnowSportId] [int] NOT NULL,
 	[CreatedByUserId] [int] NOT NULL,
 	[CreatedAt] [datetime] NOT NULL,
 	[AcceptedAt] [datetime] NULL
